@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: invoice-a2a-agent
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PUBLIC_BASE_URL
+        sync: false
+      - key: AGENT_BEARER_TOKEN
+        sync: false
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_BASE_URL
+        value: https://generativelanguage.googleapis.com/v1beta/openai
+      - key: AI_MODEL
+        value: gemini-2.5-flash
+      - key: DATABASE_URL
+        sync: false
